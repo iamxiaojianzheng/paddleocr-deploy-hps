@@ -1,0 +1,342 @@
+/* ─── 字体 & 固定量（不随主题变化） ─── */
+:root {
+    --accent:        #0284c7; /* 改为更有科技感且非紫色的极客蓝 */
+    --accent-dim:    #0369a1;
+    --accent-subtle: rgba(2, 132, 199, 0.08);
+    --glass-blur:    blur(18px);
+    --ease-spring:   cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out:      cubic-bezier(0.0, 0.0, 0.2, 1);
+    --radius-sm:     8px;
+    --radius-md:     12px;
+    --radius-lg:     18px;
+    --radius-xl:     24px;
+    --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ─── 浅色主题（默认） ─── */
+html, html[data-theme="light"] {
+    color-scheme: light;
+    /* 背景 */
+    --bg:            #f8fafc;
+    --bg-mesh:       radial-gradient(ellipse 80% 60% at 20% 10%, rgba(2, 132, 199, 0.05) 0%, transparent 70%),
+                     radial-gradient(ellipse 60% 50% at 80% 90%, rgba(2, 132, 199, 0.03) 0%, transparent 70%),
+                     #f8fafc;
+    /* 面板（Liquid Glass） */
+    --panel-bg:      rgba(255, 255, 255, 0.75);
+    --panel-border:  rgba(15, 23, 42, 0.06);
+    --panel-shadow:  0 1px 2px rgba(15, 23, 42, 0.02),
+                     0 4px 16px rgba(15, 23, 42, 0.04),
+                     0 24px 64px -12px rgba(15, 23, 42, 0.06);
+    --panel-inset:   inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    
+    /* 核心文字变量对齐 */
+    --text-1:        #0f172a;
+    --text-2:        #475569;
+    --text-3:        #94a3b8;
+    --text-primary:   #0f172a;
+    --text-secondary: #475569;
+    --text-muted:     #94a3b8;
+
+    /* 核心色彩变量对齐 */
+    --primary-color: #0284c7;
+    --accent-color:  #0ea5e9;
+    --primary-glow:  rgba(2, 132, 199, 0.15);
+    --accent-glow:   rgba(14, 165, 233, 0.1);
+    
+    /* 输入框 */
+    --input-bg:      rgba(255, 255, 255, 0.95);
+    --input-border:  rgba(15, 23, 42, 0.08);
+    --input-focus:   var(--primary-color);
+    /* 组件层级背景 */
+    --surface-1:     rgba(248, 250, 252, 0.95);
+    --surface-2:     rgba(241, 245, 249, 0.8);
+    --surface-3:     rgba(241, 245, 249, 0.5);
+    --surface-hover: rgba(2, 132, 199, 0.04);
+    --divider:       rgba(15, 23, 42, 0.05);
+    /* 开关 */
+    --switch-track:  #e2e8f0;
+    /* 代码区 */
+    --code-bg:       #f8fafc;
+    --code-text:     #334155;
+    --code-border:   rgba(15, 23, 42, 0.05);
+    --md-text:       #334155;
+    /* 状态 */
+    --success:       #0d9488;
+    --warning:       #d97706;
+    --error:         #e11d48;
+    --success-bg:    rgba(13, 148, 136, 0.06);
+    --error-bg:      rgba(225, 29, 72, 0.04);
+    /* 其他 */
+    --select-opt:    #f1f5f9;
+    --toast-bg:      rgba(15, 23, 42, 0.9);
+    --toast-text:    #f8fafc;
+    --logo-color:    #0f172a;
+    /* JSON 高亮 */
+    --json-key:      #b45309;
+    --json-str:      #0369a1;
+    --json-num:      #0f766e;
+    --json-bool:     #6d28d9;
+}
+
+/* ─── 暗色主题 ─── */
+html[data-theme="dark"] {
+    color-scheme: dark;
+    --bg:            #080c14;
+    --bg-mesh:       radial-gradient(ellipse 80% 60% at 20% 10%, rgba(2, 132, 199, 0.08) 0%, transparent 60%),
+                     radial-gradient(ellipse 60% 50% at 80% 90%, rgba(2, 132, 199, 0.05) 0%, transparent 60%),
+                     #080c14;
+    --panel-bg:      rgba(15, 23, 42, 0.65);
+    --panel-border:  rgba(255, 255, 255, 0.05);
+    --panel-shadow:  0 1px 2px rgba(0, 0, 0, 0.2),
+                     0 8px 32px rgba(0, 0, 0, 0.3),
+                     0 32px 64px -12px rgba(0, 0, 0, 0.5);
+    --panel-inset:   inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    
+    /* 核心文字变量对齐 */
+    --text-1:        #f8fafc;
+    --text-2:        #94a3b8;
+    --text-3:        #64748b;
+    --text-primary:   #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted:     #64748b;
+
+    /* 核心色彩变量对齐 */
+    --primary-color: #0284c7;
+    --accent-color:  #38bdf8;
+    --primary-glow:  rgba(2, 132, 199, 0.3);
+    --accent-glow:   rgba(56, 189, 248, 0.2);
+
+    --input-bg:      rgba(10, 15, 30, 0.55);
+    --input-border:  rgba(255, 255, 255, 0.06);
+    --input-focus:   #0ea5e9;
+    --surface-1:     rgba(255, 255, 255, 0.02);
+    --surface-2:     rgba(255, 255, 255, 0.04);
+    --surface-3:     rgba(255, 255, 255, 0.015);
+    --surface-hover: rgba(2, 132, 199, 0.08);
+    --divider:       rgba(255, 255, 255, 0.04);
+    --switch-track:  rgba(255, 255, 255, 0.12);
+    --code-bg:       #090d16;
+    --code-text:     #e2e8f0;
+    --code-border:   rgba(255, 255, 255, 0.03);
+    --md-text:       #e2e8f0;
+    --success:       #14b8a6;
+    --warning:       #f59e0b;
+    --error:         #f43f5e;
+    --success-bg:    rgba(20, 184, 166, 0.08);
+    --error-bg:      rgba(244, 63, 94, 0.06);
+    --select-opt:    #0f172a;
+    --toast-bg:      rgba(15, 23, 42, 0.95);
+    --toast-text:    #f8fafc;
+    --logo-color:    #f8fafc;
+    --json-key:      #ff7b72;
+    --json-str:      #79c0ff;
+    --json-num:      #56d364;
+    --json-bool:     #d2a8ff;
+}
+
+/* ─── 全局重置 ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.5;
+    background: var(--bg-mesh);
+    background-attachment: fixed;
+    color: var(--text-1);
+    min-height: 100dvh;
+    overflow-x: hidden;
+    transition: background-color .35s var(--ease-spring), color .25s var(--ease-spring);
+}
+
+/* ─── 应用容器 ─── */
+.app-container {
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 16px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    gap: 14px;
+}
+
+/* ─── Liquid Glass 面板 ─── */
+.glass-panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--panel-shadow), var(--panel-inset);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+    transition:
+        background .3s var(--ease-spring),
+        border-color .3s var(--ease-spring),
+        box-shadow .3s var(--ease-spring);
+}
+
+/* ─── Header ─── */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 52px;
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--panel-shadow), var(--panel-inset);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    flex-shrink: 0;
+    transition: background .3s, border-color .3s;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.logo-icon svg {
+    width: 16px;
+    height: 16px;
+    color: #fff;
+}
+
+.logo-area h1 {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--logo-color);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.badge {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 20px;
+    background: var(--accent-subtle);
+    color: var(--accent);
+    border: 1px solid rgba(0,112,243,.15);
+}
+
+/* 头部右侧操作区 */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.global-config .input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.global-config label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-3);
+    white-space: nowrap;
+}
+
+.global-config input {
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius-sm);
+    padding: 7px 11px;
+    color: var(--text-1);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    width: 220px;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.global-config input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0,112,243,.12);
+    outline: none;
+}
+
+/* 主题切换按钮 */
+.theme-toggle-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--input-border);
+    background: var(--surface-1);
+    color: var(--text-2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all .25s var(--ease-spring);
+}
+
+.theme-toggle-btn:hover {
+    border-color: var(--accent);
+    background: var(--accent-subtle);
+    color: var(--accent);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.94);
+}
+
+.theme-toggle-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ─── 主体网格布局 ─── */
+.app-body {
+    display: grid;
+    grid-template-columns: 440px 1fr;
+    gap: 14px;
+    flex: 1;
+    min-height: 0;
+}
+
+/* ─── 滚动条 ─── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+    background: var(--divider);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
+
+/* ─── 响应式 ─── */
+@media (max-width: 1024px) {
+    .app-body {
+        grid-template-columns: 1fr;
+        overflow-y: auto;
+    }
+    .app-container { height: auto; }
+}
