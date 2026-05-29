@@ -19,7 +19,7 @@ High-performance, fully offline, containerized deployment solutions for [PaddleO
 |----------|-------------|------|
 | [PP-OCRv5](PP-OCRv5/) | High-accuracy OCR supporting simplified/traditional Chinese, English, Japanese, pinyin, handwriting, vertical text, and rare characters | [English](PP-OCRv5/README.md) \| [中文](PP-OCRv5/README_cn.md) |
 | [PP-StructureV3](PP-StructureV3/) | Document layout parsing with table, formula, seal, and chart recognition, outputting structured Markdown | [English](PP-StructureV3/README.md) \| [中文](PP-StructureV3/README_cn.md) |
-| [PaddleOCR-VL](PaddleOCR-VL/) | Vision-language model based document understanding powered by PaddleOCR-VL-1.5 with layout detection | [English](PaddleOCR-VL/README.md) \| [中文](PaddleOCR-VL/README_ch.md) |
+| [PaddleOCR-VL](PaddleOCR-VL/) | Vision-language model based document understanding powered by PaddleOCR-VL-1.6 with layout detection | [English](PaddleOCR-VL/README.md) \| [中文](PaddleOCR-VL/README_ch.md) |
 
 ## Requirements
 

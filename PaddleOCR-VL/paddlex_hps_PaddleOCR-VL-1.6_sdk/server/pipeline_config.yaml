@@ -1,5 +1,5 @@
 
-pipeline_name: PaddleOCR-VL-1.5
+pipeline_name: PaddleOCR-VL-1.6
 
 batch_size: 64
 
@@ -28,8 +28,8 @@ SubModules:
     batch_size: 8
     threshold: 0.3
     layout_nms: True
-    layout_unclip_ratio: [1.0, 1.0] 
-    layout_merge_bboxes_mode: 
+    layout_unclip_ratio: [1.0, 1.0]
+    layout_merge_bboxes_mode:
       0: "union" # abstract
       1: "union" # algorithm
       2: "union" # aside_text
@@ -57,7 +57,7 @@ SubModules:
       24: "union" # vision_footnote
   VLRecognition:
     module_name: vl_recognition
-    model_name: PaddleOCR-VL-1.5-0.9B
+    model_name: PaddleOCR-VL-1.6-0.9B
     model_dir: null
     batch_size: 4096
     genai_config:
