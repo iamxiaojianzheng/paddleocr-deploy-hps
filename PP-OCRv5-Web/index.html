@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PP-OCRv5 API 测试预览工具</title>
+    <!-- Google Fonts Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- 本地样式 -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 头部导航栏 -->
+        <header class="app-header">
+            <div class="logo-area">
+                <span class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="9" y1="9" x2="15" y2="9"/>
+                        <line x1="9" y1="13" x2="15" y2="13"/>
+                        <line x1="9" y1="17" x2="13" y2="17"/>
+                    </svg>
+                </span>
+                <h1>PP-OCRv5 <span class="badge">API Studio</span></h1>
+            </div>
+            
+            <div class="header-actions">
+                <div class="global-config">
+                    <div class="input-group">
+                        <label for="apiUrl">API Base URL</label>
+                        <input type="url" id="apiUrl" value="http://localhost:8080" placeholder="http://localhost:8080">
+                    </div>
+                </div>
+                <button type="button" class="theme-toggle-btn" id="themeToggleBtn" title="切换主题">
+                    <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- 主内容区域（左右分栏） -->
+        <main class="app-body">
+            <!-- 左栏：请求配置 -->
+            <section class="config-panel glass-panel">
+                <div class="panel-header">
+                    <div class="tabs">
+                        <button class="tab-btn active">文本识别推理</button>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <form id="ocrForm" class="api-form">
+                        <!-- 文件输入区域 -->
+                        <div class="form-section">
+                            <h3 class="section-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                    <polyline points="10 9 9 9 8 9"/>
+                                </svg>
+                                输入文件
+                            </h3>
+                            <div class="upload-area" id="uploadArea">
+                                <input type="file" id="fileInput" accept="image/*,application/pdf" style="display: none;">
+                                <div class="upload-placeholder">
+                                    <span class="upload-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                            <polyline points="17 8 12 3 7 8"/>
+                                            <line x1="12" y1="3" x2="12" y2="15"/>
+                                        </svg>
+                                    </span>
+                                    <p>拖拽或点击上传图片/PDF</p>
+                                    <span class="file-info-text">支持 PNG, JPG, JPEG, PDF</span>
+                                </div>
+                                <div class="upload-preview" style="display: none;">
+                                    <span class="preview-type-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                            <polyline points="14 2 14 8 20 8"/>
+                                        </svg>
+                                    </span>
+                                    <span class="preview-filename">filename.pdf</span>
+                                    <button type="button" class="btn-clear-file">移除</button>
+                                </div>
+                            </div>
+                            
+                            <div class="divider-text">或者</div>
+                            
+                            <div class="form-group">
+                                <label for="fileUrl">文件 URL</label>
+                                <input type="url" id="fileUrl" placeholder="https://example.com/document.pdf">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="fileType">文件类型 (fileType)</label>
+                                <select id="fileType">
+                                    <option value="">自动检测 (根据文件类型/扩展名)</option>
+                                    <option value="0">PDF 文件 (0)</option>
+                                    <option value="1">图像文件 (1)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 核心开关参数 -->
+                        <div class="form-section">
+                            <h3 class="section-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="4" y1="21" x2="4" y2="14"/>
+                                    <line x1="4" y1="10" x2="4" y2="3"/>
+                                    <line x1="12" y1="21" x2="12" y2="12"/>
+                                    <line x1="12" y1="8" x2="12" y2="3"/>
+                                    <line x1="20" y1="21" x2="20" y2="16"/>
+                                    <line x1="20" y1="12" x2="20" y2="3"/>
+                                    <line x1="1" y1="14" x2="7" y2="14"/>
+                                    <line x1="9" y1="8" x2="15" y2="8"/>
+                                    <line x1="17" y1="16" x2="23" y2="16"/>
+                                </svg>
+                                核心功能开关
+                            </h3>
+                            <div class="switch-grid">
+                                <div class="switch-item">
+                                    <label class="switch-label" for="useDocOrientationClassify">
+                                        <span class="label-title">文档方向分类</span>
+                                        <span class="label-desc">自动校正0/90/180/270度旋转</span>
+                                    </label>
+                                    <label class="switch">
+                                        <input type="checkbox" id="useDocOrientationClassify">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                
+                                <div class="switch-item">
+                                    <label class="switch-label" for="useDocUnwarping">
+                                        <span class="label-title">文本图像矫正</span>
+                                        <span class="label-desc">校正扭曲/倾斜的图片</span>
+                                    </label>
+                                    <label class="switch">
+                                        <input type="checkbox" id="useDocUnwarping">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div class="switch-item">
+                                    <label class="switch-label" for="useTextlineOrientation">
+                                        <span class="label-title">文本行方向识别</span>
+                                        <span class="label-desc">校正0/180度文本行角度</span>
+                                    </label>
+                                    <label class="switch">
+                                        <input type="checkbox" id="useTextlineOrientation">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div class="switch-item">
+                                    <label class="switch-label" for="visualize">
+                                        <span class="label-title">可视化返回</span>
+                                        <span class="label-desc">返回带标注的检测框结果图</span>
+                                    </label>
+                                    <label class="switch">
+                                        <input type="checkbox" id="visualize" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 高级推理参数 (可折叠) -->
+                        <details class="form-section expandable">
+                            <summary class="section-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                                </svg>
+                                高级参数配置
+                            </summary>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="textDetLimitSideLen">图片尺寸约束限制 (textDetLimitSideLen)</label>
+                                    <input type="number" id="textDetLimitSideLen" placeholder="默认: 64">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="textDetLimitType">约束类型 (textDetLimitType)</label>
+                                    <select id="textDetLimitType">
+                                        <option value="">默认 (min)</option>
+                                        <option value="min">min</option>
+                                        <option value="max">max</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="textDetThresh">检测像素阈值 (textDetThresh)</label>
+                                    <input type="number" id="textDetThresh" step="0.05" placeholder="默认: 0.3">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="textDetBoxThresh">检测置信度阈值 (textDetBoxThresh)</label>
+                                    <input type="number" id="textDetBoxThresh" step="0.05" placeholder="默认: 0.6">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="textDetUnclipRatio">文本框扩展系数 (textDetUnclipRatio)</label>
+                                    <input type="number" id="textDetUnclipRatio" step="0.1" placeholder="默认: 1.5">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="textRecScoreThresh">识别置信度阈值 (textRecScoreThresh)</label>
+                                    <input type="number" id="textRecScoreThresh" step="0.05" placeholder="默认: 0.0">
+                                </div>
+                            </div>
+                        </details>
+                    </form>
+                </div>
+
+                <div class="panel-footer">
+                    <button type="button" id="btnSend" class="btn-primary">
+                        <span class="btn-text">发送 API 请求</span>
+                        <span class="spinner" style="display: none;"></span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 右栏：响应结果预览 -->
+            <section class="results-panel glass-panel">
+                <!-- 状态指示器与基本信息 -->
+                <div class="status-bar" id="statusBar" style="display: none;">
+                    <div class="status-left">
+                        <span class="status-badge" id="statusBadge">200 OK</span>
+                        <span class="time-badge" id="timeBadge">1.2s</span>
+                    </div>
+                    <div class="status-right">
+                        <span class="log-id-label">Log ID:</span>
+                        <code class="log-id-value" id="logIdValue">N/A</code>
+                    </div>
+                </div>
+
+                <!-- 空状态占位 -->
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-illustration">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <line x1="10" y1="9" x2="8" y2="9"/>
+                            <line x1="2" y1="12" x2="22" y2="12" stroke-dasharray="2 2"/>
+                        </svg>
+                    </div>
+                    <h3>等待发送请求</h3>
+                    <p>配置左侧参数并点击“发送请求”，在此处实时查看 PP-OCRv5 文字识别和图像检测结果。</p>
+                </div>
+
+                <!-- 实际结果容器 -->
+                <div class="results-container" id="resultsContainer" style="display: none;">
+                    <div class="results-header">
+                        <!-- 单页/多页分页导航 -->
+                        <div class="page-selector" id="pageSelector" style="display: none;">
+                            <span class="selector-label">选择页面：</span>
+                            <div class="page-buttons" id="pageButtons">
+                                <!-- 动态插入 -->
+                            </div>
+                        </div>
+
+                        <!-- 格式展示切换 -->
+                        <div class="tabs result-format-tabs" id="resultFormatTabs">
+                            <button class="tab-btn active" data-tab="text">识别文本</button>
+                            <button class="tab-btn" data-tab="images">检测可视化</button>
+                            <button class="tab-btn" data-tab="input">输入图像</button>
+                            <button class="tab-btn" data-tab="json">JSON 结果</button>
+                        </div>
+                    </div>
+
+                    <div class="results-body">
+                        <!-- 识别文本 -->
+                        <div class="result-view active" id="viewText">
+                            <div class="text-results-list" id="textResultsList">
+                                <!-- 动态渲染识别文本列表 -->
+                            </div>
+                        </div>
+
+                        <!-- 可视化图 -->
+                        <div class="result-view" id="viewImages">
+                            <div class="images-grid" id="visualizeImagesGrid">
+                                <!-- 动态生成的 Base64 img 标签 -->
+                            </div>
+                        </div>
+
+                        <!-- 输入图像 -->
+                        <div class="result-view" id="viewInput">
+                            <div class="input-image-container">
+                                <img id="inputImagePreview" src="" alt="输入图像">
+                            </div>
+                        </div>
+
+                        <!-- JSON 结果 -->
+                        <div class="result-view" id="viewJson">
+                            <div class="json-actions">
+                                <button type="button" id="btnCopyJson" class="btn-text">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:4px;">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                    </svg>
+                                    复制 JSON
+                                </button>
+                            </div>
+                            <pre class="json-renderer"><code id="jsonRaw"></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 模态/遮罩层提示 -->
+    <div id="toast" class="toast">提示信息</div>
+
+    <!-- 图像放大预览模态框 -->
+    <div id="imagePreviewModal" class="image-preview-modal" style="display: none;">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close-btn" aria-label="关闭">&times;</button>
+            <img id="modalPreviewImage" src="" alt="预览图像">
+        </div>
+    </div>
+
+    <!-- 加载逻辑代码 -->
+    <script src="js/api.js"></script>
+    <script src="js/params.js"></script>
+    <script src="js/results.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
