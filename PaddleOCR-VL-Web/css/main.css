@@ -340,3 +340,45 @@ body {
     }
     .app-container { height: auto; }
 }
+
+/* ─── API 状态指示灯样式 ─── */
+.url-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.url-input-wrapper input {
+    padding-right: 30px !important;
+}
+
+.status-dot {
+    position: absolute;
+    right: 12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--text-3);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.status-dot.online {
+    background-color: #10b981;
+    box-shadow: 0 0 8px #10b981;
+}
+
+.status-dot.offline {
+    background-color: #f43f5e;
+    box-shadow: 0 0 8px #f43f5e;
+}
+
+.status-dot.checking {
+    background-color: var(--text-3);
+    animation: pulse-dot 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+}

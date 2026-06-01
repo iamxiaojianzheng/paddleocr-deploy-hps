@@ -190,4 +190,87 @@ document.addEventListener('DOMContentLoaded', () => {
             themeIcon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
         }
     }
+
+    // ==================== E. API 状态检测 ====================
+    const apiStatusDot = document.getElementById('apiStatusDot');
+
+    // 更新指示灯状态和提示信息
+    function updateApiStatus(status) {
+        if (!apiStatusDot) return;
+        apiStatusDot.className = 'status-dot';
+        if (status === 'online') {
+            apiStatusDot.classList.add('online');
+            apiStatusDot.title = 'API 服务可用';
+        } else if (status === 'offline') {
+            apiStatusDot.classList.add('offline');
+            apiStatusDot.title = 'API 服务不可用';
+        } else {
+            apiStatusDot.classList.add('checking');
+            apiStatusDot.title = '正在检测 API 状态...';
+        }
+    }
+
+    // 探测 URL 连通性
+    async function checkUrlAccessibility(url) {
+        if (!url) return false;
+        try {
+            const targetUrl = url.replace(/\/+$/, '');
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 2500);
+
+            // 优先使用 OPTIONS 请求探测连通性
+            await fetch(targetUrl, {
+                method: 'OPTIONS',
+                signal: controller.signal,
+                mode: 'cors'
+            });
+            clearTimeout(timeoutId);
+            return true;
+        } catch (err) {
+            // 若 OPTIONS 失败，改用 no-cors 模式的 GET 再次探测，规避跨域限制
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 2500);
+                await fetch(targetUrl, {
+                    method: 'GET',
+                    mode: 'no-cors',
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+    }
+
+    let checkTimeout = null;
+    // 执行状态检测
+    async function triggerStatusCheck() {
+        const url = apiUrlInput.value.trim();
+        if (!url) {
+            updateApiStatus('offline');
+            return;
+        }
+        updateApiStatus('checking');
+        const isAccessible = await checkUrlAccessibility(url);
+        updateApiStatus(isAccessible ? 'online' : 'offline');
+    }
+
+    // 输入防抖检测
+    function debouncedCheck() {
+        if (checkTimeout) clearTimeout(checkTimeout);
+        checkTimeout = setTimeout(triggerStatusCheck, 800);
+    }
+
+    if (apiUrlInput) {
+        apiUrlInput.addEventListener('input', debouncedCheck);
+        apiUrlInput.addEventListener('change', triggerStatusCheck);
+        
+        // 首次加载立即执行检测
+        triggerStatusCheck();
+        
+        // 开启 10 秒轮询心跳检测
+        setInterval(triggerStatusCheck, 10000);
+    }
 });

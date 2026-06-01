@@ -33,7 +33,10 @@
                 <div class="global-config">
                     <div class="input-group">
                         <label for="apiUrl">API Base URL</label>
-                        <input type="url" id="apiUrl" value="http://localhost:8080" placeholder="http://localhost:8080">
+                        <div class="url-input-wrapper">
+                            <input type="url" id="apiUrl" value="http://localhost:8080" placeholder="http://localhost:8080">
+                            <span class="status-dot" id="apiStatusDot" title="检测中..."></span>
+                        </div>
                     </div>
                 </div>
                 <button type="button" class="theme-toggle-btn" id="themeToggleBtn" title="切换主题">
