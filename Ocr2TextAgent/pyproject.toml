@@ -1,0 +1,27 @@
+[project]
+name = "ocr2textagent"
+version = "0.1.0"
+description = "基于大语言模型与 OCR 接口的文档分析智能体"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi",
+    "gradio",
+    "gradio-pdf",
+    "langchain",
+    "langchain-openai",
+    "langgraph",
+    "pydantic",
+    "pydantic-settings",
+    "python-dotenv",
+    "python-multipart",
+    "requests",
+    "uvicorn",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+package = false
