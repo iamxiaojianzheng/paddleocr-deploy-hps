@@ -320,6 +320,7 @@ function showToast(message) {
 let zoomScale = 1;
 let translateX = 0;
 let translateY = 0;
+let rotateDeg = 0;
 let isDragging = false;
 let startX = 0;
 let startY = 0;
@@ -334,20 +335,21 @@ function showImagePreview(src) {
     if (modal && modalImg) {
         modalImg.src = src;
         
-        // 重置所有的缩放和位移状态
+        // 重置所有的缩放、位移和旋转状态
         zoomScale = 1;
         translateX = 0;
         translateY = 0;
+        rotateDeg = 0;
         
         modalImg.style.transition = 'none';
-        modalImg.style.transform = 'translate(0px, 0px) scale(0.95)';
+        modalImg.style.transform = 'translate(0px, 0px) scale(0.95) rotate(0deg)';
         modal.style.display = 'flex';
         
         requestAnimationFrame(() => {
             modal.classList.add('show');
             setTimeout(() => {
                 modalImg.style.transition = 'transform 0.15s ease-out';
-                modalImg.style.transform = 'translate(0px, 0px) scale(1)';
+                modalImg.style.transform = 'translate(0px, 0px) scale(1) rotate(0deg)';
             }, 50);
         });
     }
@@ -363,7 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const backdrop = modal.querySelector('.modal-backdrop');
 
         const applyTransform = () => {
-            modalImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${zoomScale})`;
+            modalImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${zoomScale}) rotate(${rotateDeg}deg)`;
         };
 
         const closeModal = () => {
@@ -375,6 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     zoomScale = 1;
                     translateX = 0;
                     translateY = 0;
+                    rotateDeg = 0;
                     applyTransform();
                 }
             }, 300);
@@ -388,6 +391,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeModal();
             }
         });
+
+        // 绑定底部工具栏事件
+        const btnZoomIn = modal.querySelector('#btnZoomIn');
+        const btnZoomOut = modal.querySelector('#btnZoomOut');
+        const btnRotateLeft = modal.querySelector('#btnRotateLeft');
+        const btnRotateRight = modal.querySelector('#btnRotateRight');
+        const btnReset = modal.querySelector('#btnReset');
+
+        if (btnZoomIn) {
+            btnZoomIn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                zoomScale = Math.min(zoomScale + 0.2, 5.0);
+                applyTransform();
+            });
+        }
+        if (btnZoomOut) {
+            btnZoomOut.addEventListener('click', (e) => {
+                e.stopPropagation();
+                zoomScale = Math.max(zoomScale - 0.2, 0.5);
+                applyTransform();
+            });
+        }
+        if (btnRotateLeft) {
+            btnRotateLeft.addEventListener('click', (e) => {
+                e.stopPropagation();
+                rotateDeg = (rotateDeg - 90) % 360;
+                applyTransform();
+            });
+        }
+        if (btnRotateRight) {
+            btnRotateRight.addEventListener('click', (e) => {
+                e.stopPropagation();
+                rotateDeg = (rotateDeg + 90) % 360;
+                applyTransform();
+            });
+        }
+        if (btnReset) {
+            btnReset.addEventListener('click', (e) => {
+                e.stopPropagation();
+                zoomScale = 1;
+                translateX = 0;
+                translateY = 0;
+                rotateDeg = 0;
+                applyTransform();
+            });
+        }
 
         // 1. 滚轮缩放事件
         modalImg.addEventListener('wheel', (e) => {
