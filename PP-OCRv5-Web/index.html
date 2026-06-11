@@ -285,6 +285,29 @@
                     <div class="results-body">
                         <!-- 识别文本 -->
                         <div class="result-view active" id="viewText">
+                            <!-- 置信度筛选器控制面板 -->
+                            <div class="confidence-filter-container">
+                                <div class="filter-header">
+                                    <span class="filter-title">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+                                        </svg>
+                                        置信度筛选
+                                    </span>
+                                    <span class="filter-stats" id="filterStats">未识别文本</span>
+                                    <button type="button" class="btn-reset-filter" id="btnResetFilter" title="重置筛选范围">重置</button>
+                                </div>
+                                <div class="filter-slider-wrapper">
+                                    <div class="slider-track" id="sliderTrack"></div>
+                                    <input type="range" id="minConfRange" min="0" max="100" value="0" step="1" aria-label="最小置信度">
+                                    <input type="range" id="maxConfRange" min="0" max="100" value="100" step="1" aria-label="最大置信度">
+                                </div>
+                                <div class="filter-values">
+                                    <span class="val-badge" id="minConfVal">0%</span>
+                                    <span class="val-badge" id="maxConfVal">100%</span>
+                                </div>
+                            </div>
+
                             <div class="text-results-list" id="textResultsList">
                                 <!-- 动态渲染识别文本列表 -->
                             </div>

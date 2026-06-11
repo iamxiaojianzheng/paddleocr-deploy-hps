@@ -273,4 +273,150 @@ document.addEventListener('DOMContentLoaded', () => {
         // 开启 10 秒轮询心跳检测
         setInterval(triggerStatusCheck, 10000);
     }
+
+    // ==================== F. 置信度双滑块范围筛选逻辑 ====================
+    const minConfRange = document.getElementById('minConfRange');
+    const maxConfRange = document.getElementById('maxConfRange');
+    const minConfVal = document.getElementById('minConfVal');
+    const maxConfVal = document.getElementById('maxConfVal');
+    const sliderTrack = document.getElementById('sliderTrack');
+    const btnResetFilter = document.getElementById('btnResetFilter');
+    const filterContainer = document.querySelector('.confidence-filter-container');
+
+    // 缓存当前处于活动焦点的滑块，默认是最小置信度滑块
+    let activeSlider = minConfRange;
+
+    // 动态更新滑块轨道的激活进度条高亮背景
+    function updateSliderTrack() {
+        if (!minConfRange || !maxConfRange || !sliderTrack) return;
+        const minPercent = minConfRange.value;
+        const maxPercent = maxConfRange.value;
+        
+        // 利用 CSS linear-gradient 动态设置两滑块之间的高亮激活区间
+        sliderTrack.style.background = `linear-gradient(to right, var(--switch-track) ${minPercent}%, var(--primary-color) ${minPercent}%, var(--primary-color) ${maxPercent}%, var(--switch-track) ${maxPercent}%)`;
+    }
+
+    // 动态调整滑块的层级 z-index，以确保当它们数值重合或接近时，鼠标依然能选中想要拖动的滑块
+    function adjustZIndex() {
+        if (!minConfRange || !maxConfRange) return;
+        const minVal = parseInt(minConfRange.value);
+        
+        // 当最小置信度滑块值接近或到达最大值时，如果是最小值滑块被激活，让其层级变高，否则默认让最小值层级偏高
+        if (minVal > 50) {
+            minConfRange.style.zIndex = '5';
+            maxConfRange.style.zIndex = '4';
+        } else {
+            minConfRange.style.zIndex = '4';
+            maxConfRange.style.zIndex = '5';
+        }
+    }
+
+    // 切换活动滑块，并为活动滑块添加 focused 类名以进行视觉高亮
+    function setActiveSlider(slider) {
+        if (!slider) return;
+        activeSlider = slider;
+        minConfRange.classList.toggle('focused', slider === minConfRange);
+        maxConfRange.classList.toggle('focused', slider === maxConfRange);
+    }
+
+    // 统一处理滑块输入的联动校验与高亮刷新
+    function handleSliderInput(e) {
+        if (!minConfRange || !maxConfRange) return;
+
+        let minVal = parseInt(minConfRange.value);
+        let maxVal = parseInt(maxConfRange.value);
+
+        // 越界校验：防交叉
+        if (e && e.target === minConfRange) {
+            if (minVal > maxVal) {
+                minConfRange.value = maxVal;
+                minVal = maxVal;
+            }
+            setActiveSlider(minConfRange);
+        } else if (e && e.target === maxConfRange) {
+            if (maxVal < minVal) {
+                maxConfRange.value = minVal;
+                maxVal = minVal;
+            }
+            setActiveSlider(maxConfRange);
+        }
+
+        // 更新数值标签
+        if (minConfVal) minConfVal.textContent = minVal + '%';
+        if (maxConfVal) maxConfVal.textContent = maxVal + '%';
+
+        // 刷新轨道样式与 z-index 状态
+        updateSliderTrack();
+        adjustZIndex();
+
+        // 触发文本结果面板的筛选（直接使用全局常量 ResultRenderer，避开 window 作用域局限）
+        if (typeof ResultRenderer !== 'undefined' && typeof ResultRenderer.filterResults === 'function') {
+            ResultRenderer.filterResults();
+        }
+    }
+
+    // 支持鼠标滚轮在整个过滤器区域对当前活跃滑块的数值进行微调
+    function handleSliderWheel(e) {
+        if (!activeSlider) return;
+        
+        // 阻止页面整体滚动
+        e.preventDefault();
+        
+        const step = 1; // 滚轮微调步长为 1%
+        let currentVal = parseInt(activeSlider.value);
+        
+        // 向上滚动增加，向下滚动减少
+        if (e.deltaY < 0) {
+            currentVal = Math.min(currentVal + step, 100);
+        } else {
+            currentVal = Math.max(currentVal - step, 0);
+        }
+        
+        activeSlider.value = currentVal;
+        
+        // 手动触发 input 事件以级联执行过滤逻辑
+        const event = new Event('input', { bubbles: true });
+        activeSlider.dispatchEvent(event);
+    }
+
+    if (minConfRange && maxConfRange) {
+        // 绑定滑块拖动事件
+        minConfRange.addEventListener('input', handleSliderInput);
+        maxConfRange.addEventListener('input', handleSliderInput);
+
+        // 绑定鼠标点击/获取焦点事件来切换活动滑块
+        minConfRange.addEventListener('focus', () => setActiveSlider(minConfRange));
+        maxConfRange.addEventListener('focus', () => setActiveSlider(maxConfRange));
+        minConfRange.addEventListener('mousedown', () => setActiveSlider(minConfRange));
+        maxConfRange.addEventListener('mousedown', () => setActiveSlider(maxConfRange));
+
+        // 监听整个过滤器区域的 wheel 事件，避免鼠标脱离 Thumb 导致无法滚动
+        if (filterContainer) {
+            filterContainer.addEventListener('wheel', handleSliderWheel, { passive: false });
+        }
+
+        // 绑定重置按钮
+        if (btnResetFilter) {
+            btnResetFilter.addEventListener('click', () => {
+                minConfRange.value = 0;
+                maxConfRange.value = 100;
+                if (minConfVal) minConfVal.textContent = '0%';
+                if (maxConfVal) maxConfVal.textContent = '100%';
+                setActiveSlider(minConfRange);
+                updateSliderTrack();
+                adjustZIndex();
+                if (typeof ResultRenderer !== 'undefined' && typeof ResultRenderer.filterResults === 'function') {
+                    ResultRenderer.filterResults();
+                }
+                showToast('已重置置信度筛选范围');
+            });
+        }
+
+        // 默认将最小置信度滑块作为活跃滑块高亮展示
+        setActiveSlider(minConfRange);
+
+        // 初始化滑块轨道背景和层级
+        updateSliderTrack();
+        adjustZIndex();
+    }
 });

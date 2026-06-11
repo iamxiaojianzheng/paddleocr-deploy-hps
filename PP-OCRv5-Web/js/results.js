@@ -75,6 +75,11 @@ const ResultRenderer = {
             document.getElementById('pageSelector').style.display = 'none';
             document.getElementById('textResultsList').innerHTML = '<div style="color: var(--text-muted); padding: 20px; text-align: center;">无文本识别结果数据</div>';
             document.getElementById('visualizeImagesGrid').innerHTML = '';
+            // 重置筛选面板的统计状态
+            const filterStats = document.getElementById('filterStats');
+            if (filterStats) {
+                filterStats.textContent = '无识别结果';
+            }
         }
 
         // 4. 渲染 JSON 源码
@@ -161,12 +166,22 @@ const ResultRenderer = {
             recTexts.forEach((text, idx) => {
                 const item = document.createElement('div');
                 item.className = 'text-result-item';
+                // 附加原生置信度数值（默认为 1.0）
+                const rawScore = recScores[idx] !== undefined ? recScores[idx] : 1.0;
+                item.setAttribute('data-score', rawScore);
                 
                 const score = recScores[idx] !== undefined ? ` (置信度: ${(recScores[idx] * 100).toFixed(1)}%)` : '';
                 item.textContent = `[${idx + 1}] ${text}${score}`;
                 textResultsList.appendChild(item);
             });
+            // 每次渲染完毕后，根据当前筛选滑块的数值执行过滤
+            this.filterResults();
         } else {
+            // 重置筛选条数统计
+            const filterStats = document.getElementById('filterStats');
+            if (filterStats) {
+                filterStats.textContent = '此页无文本';
+            }
             textResultsList.innerHTML = '<div style="color: var(--text-muted); padding: 20px; text-align: center;">此页未识别到文本</div>';
         }
 
@@ -203,6 +218,40 @@ const ResultRenderer = {
         } else {
             inputImgPreview.src = '';
             inputImgContainer.style.display = 'none';
+        }
+    },
+
+    /**
+     * 根据当前滑块选择的置信度范围筛选列表项
+     */
+    filterResults() {
+        const minRange = document.getElementById('minConfRange');
+        const maxRange = document.getElementById('maxConfRange');
+        if (!minRange || !maxRange) return;
+
+        const minVal = parseFloat(minRange.value) / 100;
+        const maxVal = parseFloat(maxRange.value) / 100;
+
+        const items = document.querySelectorAll('#textResultsList .text-result-item');
+        let visibleCount = 0;
+
+        items.forEach(item => {
+            const scoreAttr = item.getAttribute('data-score');
+            if (scoreAttr === null) return;
+            
+            const score = parseFloat(scoreAttr);
+            if (score >= minVal && score <= maxVal) {
+                item.classList.remove('filtered-out');
+                visibleCount++;
+            } else {
+                item.classList.add('filtered-out');
+            }
+        });
+
+        // 更新筛选结果条数统计
+        const filterStats = document.getElementById('filterStats');
+        if (filterStats) {
+            filterStats.textContent = `共 ${items.length} 条，当前显示 ${visibleCount} 条`;
         }
     },
 
