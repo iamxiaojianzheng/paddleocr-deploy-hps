@@ -17,7 +17,7 @@
 
 | 产线 | 说明 | 文档 |
 |------|------|------|
-| [PP-OCRv5](PP-OCRv5/) | 高精度 OCR，支持简体/繁体中文、英文、日文、拼音、手写体、竖排文本和生僻字 | [English](PP-OCRv5/README.md) \| [中文](PP-OCRv5/README_cn.md) |
+| [PP-OCRv6](PP-OCRv6/) | 高精度 OCR，支持简体/繁体中文、英文、日文、拼音、手写体、竖排文本和生僻字 | [English](PP-OCRv6/README.md) \| [中文](PP-OCRv6/README_cn.md) |
 | [PP-StructureV3](PP-StructureV3/) | 文档版面解析，支持表格、公式、印章、图表识别，输出结构化 Markdown | [English](PP-StructureV3/README.md) \| [中文](PP-StructureV3/README_cn.md) |
 | [PaddleOCR-VL](PaddleOCR-VL/) | 基于 PaddleOCR-VL-1.6 视觉语言模型的文档理解，结合版面检测 | [English](PaddleOCR-VL/README.md) \| [中文](PaddleOCR-VL/README_ch.md) |
 
@@ -37,8 +37,8 @@
 git clone https://github.com/kyle-kw/paddleocr-deploy-hps.git
 cd paddleocr-deploy-hps
 
-# 示例：启动 PP-OCRv5
-cd PP-OCRv5
+# 示例：启动 PP-OCRv6
+cd PP-OCRv6
 docker compose up
 ```
 

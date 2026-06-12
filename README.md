@@ -17,7 +17,7 @@ High-performance, fully offline, containerized deployment solutions for [PaddleO
 
 | Pipeline | Description | Docs |
 |----------|-------------|------|
-| [PP-OCRv5](PP-OCRv5/) | High-accuracy OCR supporting simplified/traditional Chinese, English, Japanese, pinyin, handwriting, vertical text, and rare characters | [English](PP-OCRv5/README.md) \| [中文](PP-OCRv5/README_cn.md) |
+| [PP-OCRv6](PP-OCRv6/) | High-accuracy OCR supporting simplified/traditional Chinese, English, Japanese, pinyin, handwriting, vertical text, and rare characters | [English](PP-OCRv6/README.md) \| [中文](PP-OCRv6/README_cn.md) |
 | [PP-StructureV3](PP-StructureV3/) | Document layout parsing with table, formula, seal, and chart recognition, outputting structured Markdown | [English](PP-StructureV3/README.md) \| [中文](PP-StructureV3/README_cn.md) |
 | [PaddleOCR-VL](PaddleOCR-VL/) | Vision-language model based document understanding powered by PaddleOCR-VL-1.6 with layout detection | [English](PaddleOCR-VL/README.md) \| [中文](PaddleOCR-VL/README_ch.md) |
 
@@ -37,8 +37,8 @@ Choose a pipeline directory and start the services:
 git clone https://github.com/kyle-kw/paddleocr-deploy-hps.git
 cd paddleocr-deploy-hps
 
-# Example: start PP-OCRv5
-cd PP-OCRv5
+# Example: start PP-OCRv6
+cd PP-OCRv6
 docker compose up
 ```
 

@@ -10,7 +10,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Install PaddleX for Python backend models (if not already in base image)
-RUN pip install --no-cache-dir paddlex>=3.4.0 || true
+RUN pip install --no-cache-dir "paddlex>=3.4.0" || true
 
 # 安装的模型,供离线使用
 ENV HOME=/root
