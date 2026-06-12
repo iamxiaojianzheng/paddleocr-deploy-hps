@@ -10,7 +10,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Install PaddleX for Python backend models (if not already in base image)
-RUN pip install --no-cache-dir "paddlex>=3.4.0" || true
+RUN pip install --no-cache-dir "paddlex[ocr]>=3.7.0" || true
 
 # 安装的模型,供离线使用
 ENV HOME=/root
@@ -21,9 +21,9 @@ RUN mkdir -p "${HOME}/.paddlex/official_models" \
             https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-DocBlockLayout_infer.tar \
             https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-LCNet_x1_0_doc_ori_infer.tar \
             https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/UVDoc_infer.tar \
-            https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv5_server_det_infer.tar \
+            https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv6_medium_det_infer.tar \
+            https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv6_medium_rec_infer.tar \
             https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-LCNet_x1_0_textline_ori_infer.tar \
-            https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv5_server_rec_infer.tar \
             https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-LCNet_x1_0_table_cls_infer.tar \
             https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/SLANeXt_wired_infer.tar \
             https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/SLANet_plus_infer.tar \
@@ -45,15 +45,15 @@ RUN mkdir -p "${HOME}/.paddlex/official_models" \
         && tar -xf UVDoc_infer.tar \
         && mv UVDoc_infer UVDoc \
         && rm -f UVDoc_infer.tar \
-        && tar -xf PP-OCRv5_server_det_infer.tar \
-        && mv PP-OCRv5_server_det_infer PP-OCRv5_server_det \
-        && rm -f PP-OCRv5_server_det_infer.tar \
+        && tar -xf PP-OCRv6_medium_det_infer.tar \
+        && mv PP-OCRv6_medium_det_infer PP-OCRv6_medium_det \
+        && rm -f PP-OCRv6_medium_det_infer.tar \
+        && tar -xf PP-OCRv6_medium_rec_infer.tar \
+        && mv PP-OCRv6_medium_rec_infer PP-OCRv6_medium_rec \
+        && rm -f PP-OCRv6_medium_rec_infer.tar \
         && tar -xf PP-LCNet_x1_0_textline_ori_infer.tar \
         && mv PP-LCNet_x1_0_textline_ori_infer PP-LCNet_x1_0_textline_ori \
         && rm -f PP-LCNet_x1_0_textline_ori_infer.tar \
-        && tar -xf PP-OCRv5_server_rec_infer.tar \
-        && mv PP-OCRv5_server_rec_infer PP-OCRv5_server_rec \
-        && rm -f PP-OCRv5_server_rec_infer.tar \
         && tar -xf PP-LCNet_x1_0_table_cls_infer.tar \
         && mv PP-LCNet_x1_0_table_cls_infer PP-LCNet_x1_0_table_cls \
         && rm -f PP-LCNet_x1_0_table_cls_infer.tar \
