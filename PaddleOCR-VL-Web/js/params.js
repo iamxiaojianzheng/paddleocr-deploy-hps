@@ -44,7 +44,9 @@ const ParamCollector = {
             'prettifyMarkdown',
             'restructurePages',
             'mergeTables',
-            'relevelTitles'
+            'relevelTitles',
+            'layoutNms',
+            'showFormulaNumber'
             // visualize 三态处理，不在这里
         ];
 
@@ -96,6 +98,12 @@ const ParamCollector = {
 
         const maxNew = parseNumberField('maxNewTokens');
         if (maxNew !== null) payload.maxNewTokens = parseInt(maxNew, 10);
+
+        const minPixels = parseNumberField('minPixels');
+        if (minPixels !== null) payload.minPixels = parseInt(minPixels, 10);
+
+        const maxPixels = parseNumberField('maxPixels');
+        if (maxPixels !== null) payload.maxPixels = parseInt(maxPixels, 10);
 
         // 处理复杂类型：layoutThreshold, layoutUnclipRatio
         const thresholdVal = document.getElementById('layoutThreshold').value.trim();

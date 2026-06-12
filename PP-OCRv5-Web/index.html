@@ -104,7 +104,7 @@
                             </div>
                             
                             <div class="form-group">
-                                <label for="fileType">文件类型 (fileType)</label>
+                                <label for="fileType">文件类型 (fileType) <span class="info-icon" data-tooltip="文件类型。0表示PDF文件，1表示图像文件。若请求体无此属性，则将根据URL推断文件类型。">?</span></label>
                                 <select id="fileType">
                                     <option value="">自动检测 (根据文件类型/扩展名)</option>
                                     <option value="0">PDF 文件 (0)</option>
@@ -132,7 +132,7 @@
                             <div class="switch-grid">
                                 <div class="switch-item">
                                     <label class="switch-label" for="useDocOrientationClassify">
-                                        <span class="label-title">文档方向分类</span>
+                                        <span class="label-title">文档方向分类 <span class="info-icon" data-tooltip="是否在推理时使用文档方向分类模块，开启后，可以自动识别并矫正 0°、90°、180°、270°的图片，默认初始化为 False。">?</span></span>
                                         <span class="label-desc">自动校正0/90/180/270度旋转</span>
                                     </label>
                                     <label class="switch">
@@ -143,7 +143,7 @@
                                 
                                 <div class="switch-item">
                                     <label class="switch-label" for="useDocUnwarping">
-                                        <span class="label-title">文本图像矫正</span>
+                                        <span class="label-title">文本图像矫正 <span class="info-icon" data-tooltip="是否在推理时使用文本图像矫正模块，开启后，可以自动矫正扭曲图片，例如褶皱、倾斜等情况，默认初始化为 False。">?</span></span>
                                         <span class="label-desc">校正扭曲/倾斜的图片</span>
                                     </label>
                                     <label class="switch">
@@ -154,7 +154,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="useTextlineOrientation">
-                                        <span class="label-title">文本行方向识别</span>
+                                        <span class="label-title">文本行方向识别 <span class="info-icon" data-tooltip="是否在推理时使用文本行方向分类模块，开启后，可以自动识别和矫正 0° 和 180° 的文本行，默认初始化为 False。">?</span></span>
                                         <span class="label-desc">校正0/180度文本行角度</span>
                                     </label>
                                     <label class="switch">
@@ -165,7 +165,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="visualize">
-                                        <span class="label-title">可视化返回</span>
+                                        <span class="label-title">可视化返回 <span class="info-icon" data-tooltip="是否返回可视化结果图及处理过程中的中间图像。开启此功能后，将增加结果返回时间。默认为 true 开启。">?</span></span>
                                         <span class="label-desc">返回带标注的检测框结果图</span>
                                     </label>
                                     <label class="switch">
@@ -187,12 +187,12 @@
                             </summary>
                             <div class="form-grid">
                                 <div class="form-group">
-                                    <label for="textDetLimitSideLen">图片尺寸约束限制 (textDetLimitSideLen)</label>
+                                    <label for="textDetLimitSideLen">图片尺寸约束限制 (textDetLimitSideLen) <span class="info-icon" data-tooltip="文本检测的图像边长限制。大于 0 的任意整数。如果不设置，将使用产线初始化的该参数值，默认初始化为 64。">?</span></label>
                                     <input type="number" id="textDetLimitSideLen" placeholder="默认: 64">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="textDetLimitType">约束类型 (textDetLimitType)</label>
+                                    <label for="textDetLimitType">约束类型 (textDetLimitType) <span class="info-icon" data-tooltip="文本检测的边长度限制类型。支持 min 和 max。min 表示保证图像最短边不小于限制边长，max 表示保证图像最长边不大于限制边长。默认初始化为 min。">?</span></label>
                                     <select id="textDetLimitType">
                                         <option value="">默认 (min)</option>
                                         <option value="min">min</option>
@@ -201,22 +201,22 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="textDetThresh">检测像素阈值 (textDetThresh)</label>
+                                    <label for="textDetThresh">检测像素阈值 (textDetThresh) <span class="info-icon" data-tooltip="文本检测像素阈值，输出的概率图中，得分大于该阈值的像素点才会被认为是文字像素点。如果不设置，将使用产线默认初始值 0.3。">?</span></label>
                                     <input type="number" id="textDetThresh" step="0.05" placeholder="默认: 0.3">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="textDetBoxThresh">检测置信度阈值 (textDetBoxThresh)</label>
+                                    <label for="textDetBoxThresh">检测置信度阈值 (textDetBoxThresh) <span class="info-icon" data-tooltip="文本检测框阈值，检测结果边框内，所有像素点的平均得分大于该阈值时，该结果会被认为是文字区域。如果不设置，将使用产线默认初始值 0.6。">?</span></label>
                                     <input type="number" id="textDetBoxThresh" step="0.05" placeholder="默认: 0.6">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="textDetUnclipRatio">文本框扩展系数 (textDetUnclipRatio)</label>
+                                    <label for="textDetUnclipRatio">文本框扩展系数 (textDetUnclipRatio) <span class="info-icon" data-tooltip="文本检测扩张系数，使用该方法对文字区域进行扩张，该值越大，扩张的面积越大。如果不设置，将使用产线默认初始值 1.5。">?</span></label>
                                     <input type="number" id="textDetUnclipRatio" step="0.1" placeholder="默认: 1.5">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="textRecScoreThresh">识别置信度阈值 (textRecScoreThresh)</label>
+                                    <label for="textRecScoreThresh">识别置信度阈值 (textRecScoreThresh) <span class="info-icon" data-tooltip="文本识别置信度阈值，得分大于该阈值的文本结果会被保留。如果不设置，将使用产线默认值 0.0，即不设阈值。">?</span></label>
                                     <input type="number" id="textRecScoreThresh" step="0.05" placeholder="默认: 0.0">
                                 </div>
                             </div>

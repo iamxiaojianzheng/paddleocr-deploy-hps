@@ -110,7 +110,7 @@
                             </div>
                             
                             <div class="form-group">
-                                <label for="fileType">文件类型 (fileType)</label>
+                                <label for="fileType">文件类型 (fileType) <span class="info-icon" data-tooltip="文件类型。0表示PDF文件，1表示图像文件。若请求体无此属性，则将根据URL推断文件类型。">?</span></label>
                                 <select id="fileType">
                                     <option value="">自动检测 (根据URL)</option>
                                     <option value="0">PDF 文件 (0)</option>
@@ -138,7 +138,7 @@
                             <div class="switch-grid">
                                 <div class="switch-item">
                                     <label class="switch-label" for="useLayoutDetection">
-                                        <span class="label-title">使用版面分析</span>
+                                        <span class="label-title">使用版面分析 <span class="info-icon" data-tooltip="是否在推理时使用版面区域检测排序模块，开启后，可以自动检测文档中不同区域并排序。">?</span></span>
                                         <span class="label-desc">useLayoutDetection (默认开启)</span>
                                     </label>
                                     <label class="switch">
@@ -149,7 +149,7 @@
                                 
                                 <div class="switch-item">
                                     <label class="switch-label" for="useDocOrientationClassify">
-                                        <span class="label-title">文档方向分类</span>
+                                        <span class="label-title">文档方向分类 <span class="info-icon" data-tooltip="是否在推理时使用文本图像方向矫正模块，开启后，可以自动识别并矫正 0°、90°、180°、270°的图片。">?</span></span>
                                         <span class="label-desc">useDocOrientationClassify</span>
                                     </label>
                                     <label class="switch">
@@ -160,7 +160,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="useDocUnwarping">
-                                        <span class="label-title">文本图像矫正</span>
+                                        <span class="label-title">文本图像矫正 <span class="info-icon" data-tooltip="是否在推理时使用文本图像矫正模块，开启后，可以自动矫正扭曲图片，例如褶皱、倾斜等情况。">?</span></span>
                                         <span class="label-desc">useDocUnwarping</span>
                                     </label>
                                     <label class="switch">
@@ -171,7 +171,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="useChartRecognition">
-                                        <span class="label-title">图表解析</span>
+                                        <span class="label-title">图表解析 <span class="info-icon" data-tooltip="是否在推理时使用图表解析模块，开启后，可以自动解析文档中的图表并转换为表格形式。">?</span></span>
                                         <span class="label-desc">useChartRecognition</span>
                                     </label>
                                     <label class="switch">
@@ -182,7 +182,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="useSealRecognition">
-                                        <span class="label-title">印章识别</span>
+                                        <span class="label-title">印章识别 <span class="info-icon" data-tooltip="是否在推理时检测并识别文档中的印章区域。">?</span></span>
                                         <span class="label-desc">useSealRecognition</span>
                                     </label>
                                     <label class="switch">
@@ -193,7 +193,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="useOcrForImageBlock">
-                                        <span class="label-title">识别图片文字</span>
+                                        <span class="label-title">识别图片文字 <span class="info-icon" data-tooltip="是否提取并识别版面中图片区域内的文本内容。">?</span></span>
                                         <span class="label-desc">useOcrForImageBlock</span>
                                     </label>
                                     <label class="switch">
@@ -204,7 +204,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="formatBlockContent">
-                                        <span class="label-title">格式化为 Markdown</span>
+                                        <span class="label-title">格式化为 Markdown <span class="info-icon" data-tooltip="是否将提取出的各个版面区域内容格式化为 Markdown 语法输出。">?</span></span>
                                         <span class="label-desc">formatBlockContent</span>
                                     </label>
                                     <label class="switch">
@@ -215,7 +215,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="prettifyMarkdown">
-                                        <span class="label-title">美化 Markdown</span>
+                                        <span class="label-title">美化 Markdown <span class="info-icon" data-tooltip="是否输出美化后的 Markdown 文本。">?</span></span>
                                         <span class="label-desc">prettifyMarkdown (默认开启)</span>
                                     </label>
                                     <label class="switch">
@@ -226,7 +226,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="restructurePages">
-                                        <span class="label-title">重构多页结果</span>
+                                        <span class="label-title">重构多页结果 <span class="info-icon" data-tooltip="对多页 pdf 解析结果进行重构，用于适配跨页表格合并和段落标题级别识别。">?</span></span>
                                         <span class="label-desc">restructurePages</span>
                                     </label>
                                     <label class="switch">
@@ -237,7 +237,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="mergeTables">
-                                        <span class="label-title">跨页表格合并</span>
+                                        <span class="label-title">跨页表格合并 <span class="info-icon" data-tooltip="开启后，会识别跨页表格，将其合并为一个，当且仅当 useLayoutDetection=False 且开启重构多页时生效。">?</span></span>
                                         <span class="label-desc">mergeTables (需开启重构多页)</span>
                                     </label>
                                     <label class="switch">
@@ -248,11 +248,33 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="relevelTitles">
-                                        <span class="label-title">多级标题分级</span>
+                                        <span class="label-title">多级标题分级 <span class="info-icon" data-tooltip="开启后，会识别段落标题级别，当且仅当 useLayoutDetection=False 且开启重构多页时生效。">?</span></span>
                                         <span class="label-desc">relevelTitles (需开启重构多页)</span>
                                     </label>
                                     <label class="switch">
                                         <input type="checkbox" id="relevelTitles">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div class="switch-item">
+                                    <label class="switch-label" for="layoutNms">
+                                        <span class="label-title">NMS后处理 <span class="info-icon" data-tooltip="版面检测是否使用后处理NMS，开启后，会自动移除重复或高度重叠的区域框。">?</span></span>
+                                        <span class="label-desc">layoutNms</span>
+                                    </label>
+                                    <label class="switch">
+                                        <input type="checkbox" id="layoutNms">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div class="switch-item">
+                                    <label class="switch-label" for="showFormulaNumber">
+                                        <span class="label-title">公式编号展示 <span class="info-icon" data-tooltip="输出的 Markdown 文本中是否包含公式编号。">?</span></span>
+                                        <span class="label-desc">showFormulaNumber</span>
+                                    </label>
+                                    <label class="switch">
+                                        <input type="checkbox" id="showFormulaNumber">
                                         <span class="slider"></span>
                                     </label>
                                 </div>
@@ -272,7 +294,7 @@
                             </summary>
                             <div class="form-grid">
                                 <div class="form-group">
-                                    <label for="layoutShapeMode">版面几何形状 (layoutShapeMode)</label>
+                                    <label for="layoutShapeMode">版面几何形状 (layoutShapeMode) <span class="info-icon" data-tooltip="指定版面检测结果的几何形状表示模式。可填写参数为 rect (矩形)、quad (四边形)、poly (多边形) 和 auto (自动)。">?</span></label>
                                     <select id="layoutShapeMode">
                                         <option value="">未指定 (默认)</option>
                                         <option value="rect">矩形 (rect)</option>
@@ -283,7 +305,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="layoutMergeBboxesMode">重叠框过滤方式 (layoutMergeBboxesMode)</label>
+                                    <label for="layoutMergeBboxesMode">重叠框过滤方式 (layoutMergeBboxesMode) <span class="info-icon" data-tooltip="对于互相重叠的检测框的处理：large(仅保留外部最大框), small(仅保留内部被包含小框), union(内外框都保留)。">?</span></label>
                                     <select id="layoutMergeBboxesMode">
                                         <option value="">未指定 (默认)</option>
                                         <option value="large">保留大框 (large)</option>
@@ -293,42 +315,52 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="layoutThreshold">版面模型阈值 (layoutThreshold)</label>
+                                    <label for="layoutThreshold">版面模型阈值 (layoutThreshold) <span class="info-icon" data-tooltip="版面模型得分阈值。0-1 之间的任意浮点数或特定JSON对象。默认初始化为 0.5。">?</span></label>
                                     <input type="text" id="layoutThreshold" placeholder="数字或 JSON 例如: 0.5 或 {0: 0.1}">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="layoutUnclipRatio">检测框扩张系数 (layoutUnclipRatio)</label>
+                                    <label for="layoutUnclipRatio">检测框扩张系数 (layoutUnclipRatio) <span class="info-icon" data-tooltip="版面区域检测模型检测框的扩张系数。任意大于 0 浮点数，如 1.5。默认初始化为 1.0。">?</span></label>
                                     <input type="text" id="layoutUnclipRatio" placeholder="数字或数组/JSON，如: 1.5">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="promptLabel">VL模型 Prompt 类型 (promptLabel)</label>
+                                    <label for="promptLabel">VL模型 Prompt 类型 (promptLabel) <span class="info-icon" data-tooltip="VL模型的 prompt 类型设置，当且仅当 useLayoutDetection=False 时生效。可选：ocr、formula、table、chart。">?</span></label>
                                     <input type="text" id="promptLabel" placeholder="仅在 useLayoutDetection=false 时生效">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="temperature">采样温度 (temperature)</label>
+                                    <label for="temperature">采样温度 (temperature) <span class="info-icon" data-tooltip="结果不稳定或出现明显幻觉时调低，漏识别或者重复较多时可略微调高。">?</span></label>
                                     <input type="number" id="temperature" step="0.1" placeholder="默认">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="topP">Top-P 参数 (topP)</label>
+                                    <label for="topP">Top-P 参数 (topP) <span class="info-icon" data-tooltip="结果发散、不够可信时可适当调低，让模型更保守。">?</span></label>
                                     <input type="number" id="topP" step="0.05" placeholder="默认">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="repetitionPenalty">重复惩罚参数 (repetitionPenalty)</label>
+                                    <label for="repetitionPenalty">重复惩罚参数 (repetitionPenalty) <span class="info-icon" data-tooltip="结果中出现重复文字、重复表格内容时，可适当调高。">?</span></label>
                                     <input type="number" id="repetitionPenalty" step="0.1" placeholder="默认">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="maxNewTokens">最大 Token 数 (maxNewTokens)</label>
+                                    <label for="maxNewTokens">最大 Token 数 (maxNewTokens) <span class="info-icon" data-tooltip="设置 VL 模型生成响应时的最大 Token 数量。">?</span></label>
                                     <input type="number" id="maxNewTokens" placeholder="默认">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="outputFormats">导出格式 (outputFormats)</label>
+                                    <label for="minPixels">最小图像尺寸 (minPixels) <span class="info-icon" data-tooltip="输入图片太小、文字看不清时可适当调高，一般无需调整。">?</span></label>
+                                    <input type="number" id="minPixels" placeholder="默认">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="maxPixels">最大图像尺寸 (maxPixels) <span class="info-icon" data-tooltip="输入图片特别大、处理变慢或显存压力较大时可适当调低。">?</span></label>
+                                    <input type="number" id="maxPixels" placeholder="默认">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="outputFormats">导出格式 (outputFormats) <span class="info-icon" data-tooltip="是否导出特定文件格式结果，如 Docx Word 文档。">?</span></label>
                                     <div class="checkbox-group">
                                         <label class="checkbox-label">
                                             <input type="checkbox" id="outputFormatDocx" value="docx"> Word (docx)
@@ -337,7 +369,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="visualize">返回可视化图 (visualize)</label>
+                                    <label for="visualize">返回可视化图 (visualize) <span class="info-icon" data-tooltip="是否返回可视化结果图及处理过程中的中间图像。开启将增加返回时间。">?</span></label>
                                     <select id="visualize">
                                         <option value="">跟随服务端配置（默认）</option>
                                         <option value="true">强制返回 (true)</option>
@@ -405,7 +437,7 @@
                             <div class="switch-grid">
                                 <div class="switch-item">
                                     <label class="switch-label" for="restructureMergeTables">
-                                        <span class="label-title">跨页表格合并</span>
+                                        <span class="label-title">跨页表格合并 <span class="info-icon" data-tooltip="开启后，会识别多页中跨页切分的表格并将其合并为一个。">?</span></span>
                                         <span class="label-desc">mergeTables</span>
                                     </label>
                                     <label class="switch">
@@ -416,7 +448,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="restructureRelevelTitles">
-                                        <span class="label-title">多级标题分级</span>
+                                        <span class="label-title">多级标题分级 <span class="info-icon" data-tooltip="开启后，识别并分级文档中的段落标题。">?</span></span>
                                         <span class="label-desc">relevelTitles</span>
                                     </label>
                                     <label class="switch">
@@ -427,7 +459,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="concatenatePages">
-                                        <span class="label-title">多页拼接为单页</span>
+                                        <span class="label-title">多页拼接为单页 <span class="info-icon" data-tooltip="是否将所有页面的 Markdown 拼接在一起，形成一个统一的 Markdown 文本输出。">?</span></span>
                                         <span class="label-desc">concatenatePages</span>
                                     </label>
                                     <label class="switch">
@@ -438,7 +470,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="restructurePrettify">
-                                        <span class="label-title">美化 Markdown</span>
+                                        <span class="label-title">美化 Markdown <span class="info-icon" data-tooltip="重构输出时，是否对多页 Markdown 格式进行对齐及美化处理。">?</span></span>
                                         <span class="label-desc">prettifyMarkdown (默认开启)</span>
                                     </label>
                                     <label class="switch">
@@ -449,7 +481,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="restructureFormulaNum">
-                                        <span class="label-title">显示公式编号</span>
+                                        <span class="label-title">显示公式编号 <span class="info-icon" data-tooltip="在重构输出的 Markdown 中是否为识别出的公式展示编号。">?</span></span>
                                         <span class="label-desc">showFormulaNumber</span>
                                     </label>
                                     <label class="switch">

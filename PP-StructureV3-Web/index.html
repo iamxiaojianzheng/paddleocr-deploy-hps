@@ -107,7 +107,7 @@
                             </div>
                             
                             <div class="form-group">
-                                <label for="fileType">文件类型 (fileType)</label>
+                                <label for="fileType">文件类型 (fileType) <span class="info-icon" data-tooltip="文件类型。0表示PDF文件，1表示图像文件。若请求体无此属性，则将根据URL推断文件类型。">?</span></label>
                                 <select id="fileType">
                                     <option value="">自动检测 (根据文件后缀)</option>
                                     <option value="0">PDF 文件 (0)</option>
@@ -135,7 +135,7 @@
                             <div class="switch-grid">
                                 <div class="switch-item">
                                     <label class="switch-label" for="useTableRecognition">
-                                        <span class="label-title">表格识别</span>
+                                        <span class="label-title">表格识别 <span class="info-icon" data-tooltip="是否在推理时使用表格识别子产线，开启后，可以将文档中的表格转换为HTML或Markdown的结构化格式；若不开启，表格会保留为图片形式，默认初始化为 True。">?</span></span>
                                         <span class="label-desc">useTableRecognition (默认开启)</span>
                                     </label>
                                     <label class="switch">
@@ -146,7 +146,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="useFormulaRecognition">
-                                        <span class="label-title">公式识别</span>
+                                        <span class="label-title">公式识别 <span class="info-icon" data-tooltip="是否在推理时使用公式识别子产线，开启后，可以将数学公式转换为LaTeX代码；若不开启，公式会按普通文本识别，默认初始化为 True。">?</span></span>
                                         <span class="label-desc">useFormulaRecognition (默认开启)</span>
                                     </label>
                                     <label class="switch">
@@ -157,7 +157,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="useRegionDetection">
-                                        <span class="label-title">复杂版面处理</span>
+                                        <span class="label-title">复杂版面处理 <span class="info-icon" data-tooltip="是否在推理时使用文档区域检测模块，开启后，可以更好地识别报纸、杂志等排版复杂的文档内容，提高识别准确性，默认初始化为 True。">?</span></span>
                                         <span class="label-desc">useRegionDetection (默认开启)</span>
                                     </label>
                                     <label class="switch">
@@ -168,7 +168,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="useDocOrientationClassify">
-                                        <span class="label-title">图片方向矫正</span>
+                                        <span class="label-title">图片方向矫正 <span class="info-icon" data-tooltip="是否在推理时使用文档方向分类模块，开启后，可以自动识别并矫正 0°、90°、180°、270°的图片，默认初始化为 False。">?</span></span>
                                         <span class="label-desc">useDocOrientationClassify</span>
                                     </label>
                                     <label class="switch">
@@ -179,7 +179,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="useDocUnwarping">
-                                        <span class="label-title">图片扭曲矫正</span>
+                                        <span class="label-title">图片扭曲矫正 <span class="info-icon" data-tooltip="是否在推理时使用文本图像矫正模块，开启后，可以自动矫正扭曲图片，例如褶皱、倾斜等情况，默认初始化为 False。">?</span></span>
                                         <span class="label-desc">useDocUnwarping</span>
                                     </label>
                                     <label class="switch">
@@ -190,7 +190,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="useTextlineOrientation">
-                                        <span class="label-title">文本行方向矫正</span>
+                                        <span class="label-title">文本行方向矫正 <span class="info-icon" data-tooltip="是否在推理时使用文本行方向分类模块，开启后，可以自动识别和矫正 0° 和 180° 的文本行，默认初始化为 False。">?</span></span>
                                         <span class="label-desc">useTextlineOrientation</span>
                                     </label>
                                     <label class="switch">
@@ -201,7 +201,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="useSealRecognition">
-                                        <span class="label-title">印章识别</span>
+                                        <span class="label-title">印章识别 <span class="info-icon" data-tooltip="是否在推理时使用印章文本识别子产线，开启后，可以识别文档中的印章内容，默认初始化为 False。">?</span></span>
                                         <span class="label-desc">useSealRecognition</span>
                                     </label>
                                     <label class="switch">
@@ -212,7 +212,7 @@
 
                                 <div class="switch-item">
                                     <label class="switch-label" for="useChartRecognition">
-                                        <span class="label-title">图表转表格</span>
+                                        <span class="label-title">图表转表格 <span class="info-icon" data-tooltip="是否在推理时使用图表解析模块，开启后，可以自动解析文档中的图表并转换为表格形式，默认初始化为 False。">?</span></span>
                                         <span class="label-desc">useChartRecognition</span>
                                     </label>
                                     <label class="switch">
@@ -236,17 +236,17 @@
                                 <h4 style="font-size: 11px; color: var(--text-primary); border-bottom: 1px solid var(--divider); padding-bottom: 4px; margin-top: 5px;">版面分析参数</h4>
                                 
                                 <div class="form-group">
-                                    <label for="layoutThreshold">版面模型阈值 (layoutThreshold)</label>
+                                    <label for="layoutThreshold">版面模型阈值 (layoutThreshold) <span class="info-icon" data-tooltip="版面模型得分阈值，0-1 之间的任意浮点数。如果不设置，将使用产线初始化的该参数值，默认为 0.5。">?</span></label>
                                     <input type="number" id="layoutThreshold" step="0.05" placeholder="默认 0.5">
                                 </div>
-
+ 
                                 <div class="form-group">
-                                    <label for="layoutUnclipRatio">检测框扩张系数 (layoutUnclipRatio)</label>
+                                    <label for="layoutUnclipRatio">检测框扩张系数 (layoutUnclipRatio) <span class="info-icon" data-tooltip="版面区域检测模型检测框的扩张系数。 任意大于 0 浮点数。如果不设置，将使用产线初始化默认值 1.0。">?</span></label>
                                     <input type="number" id="layoutUnclipRatio" step="0.1" placeholder="默认 1.0">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="layoutMergeBboxesMode">重叠框过滤方式 (layoutMergeBboxesMode)</label>
+                                    <label for="layoutMergeBboxesMode">重叠框过滤方式 (layoutMergeBboxesMode) <span class="info-icon" data-tooltip="对于互相重叠的检测框的处理：large(仅保留外部最大框), small(仅保留内部小框), union(都保留)。">?</span></label>
                                     <select id="layoutMergeBboxesMode">
                                         <option value="">默认 (large)</option>
                                         <option value="large">只保留外侧大框 (large)</option>
@@ -257,19 +257,19 @@
 
                                 <div class="form-group">
                                     <label class="checkbox-label" style="margin-top: 8px;">
-                                        <input type="checkbox" id="layoutNms"> 开启 NMS 后处理 (layoutNms)
+                                        <input type="checkbox" id="layoutNms"> 开启 NMS 后处理 (layoutNms) <span class="info-icon" data-tooltip="开启后，会自动移除重复或高度重叠的区域框。">?</span>
                                     </label>
                                 </div>
 
                                 <h4 style="font-size: 11px; color: var(--text-primary); border-bottom: 1px solid var(--divider); padding-bottom: 4px; margin-top: 10px;">文本检测/识别参数</h4>
 
                                 <div class="form-group">
-                                    <label for="textDetLimitSideLen">文本检测图像边长限制 (textDetLimitSideLen)</label>
+                                    <label for="textDetLimitSideLen">文本检测图像边长限制 (textDetLimitSideLen) <span class="info-icon" data-tooltip="文本检测的图像边长限制。大于 0 的任意整数。如果不设置，默认初始化为 736。">?</span></label>
                                     <input type="number" id="textDetLimitSideLen" placeholder="默认 736">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="textDetLimitType">检测限制边长类型 (textDetLimitType)</label>
+                                    <label for="textDetLimitType">检测限制边长类型 (textDetLimitType) <span class="info-icon" data-tooltip="文本检测的边长度限制类型。支持 min 和 max。min 表示最短边限制，max 表示最长边限制。默认初始化为 min。">?</span></label>
                                     <select id="textDetLimitType">
                                         <option value="">默认 (min)</option>
                                         <option value="min">限制最短边 (min)</option>
@@ -278,34 +278,34 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="textDetThresh">文本检测像素阈值 (textDetThresh)</label>
+                                    <label for="textDetThresh">文本检测像素阈值 (textDetThresh) <span class="info-icon" data-tooltip="得分大于该阈值的像素点才会被认为是文字像素点。如果不设置，将使用默认初始值 0.3。">?</span></label>
                                     <input type="number" id="textDetThresh" step="0.05" placeholder="默认 0.3">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="textDetBoxThresh">文本检测框阈值 (textDetBoxThresh)</label>
+                                    <label for="textDetBoxThresh">文本检测框阈值 (textDetBoxThresh) <span class="info-icon" data-tooltip="检测区域所有像素点的平均得分大于该阈值时被认为是文字区域。如果不设置，默认初始值为 0.6。">?</span></label>
                                     <input type="number" id="textDetBoxThresh" step="0.05" placeholder="默认 0.6">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="textDetUnclipRatio">文本检测扩张系数 (textDetUnclipRatio)</label>
+                                    <label for="textDetUnclipRatio">文本检测扩张系数 (textDetUnclipRatio) <span class="info-icon" data-tooltip="文本检测扩张系数，使用该方法对文字区域进行扩张。该值越大扩张面积越大，如果不设置，默认为 1.5。">?</span></label>
                                     <input type="number" id="textDetUnclipRatio" step="0.1" placeholder="默认 1.5">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="textRecScoreThresh">文本识别过滤阈值 (textRecScoreThresh)</label>
+                                    <label for="textRecScoreThresh">文本识别过滤阈值 (textRecScoreThresh) <span class="info-icon" data-tooltip="文本识别阈值，得分大于该阈值的文本结果会被保留。如果不设置，默认初始值为 0.0（不设阈值）。">?</span></label>
                                     <input type="number" id="textRecScoreThresh" step="0.05" placeholder="默认 0.0 (不限制)">
                                 </div>
 
                                 <h4 style="font-size: 11px; color: var(--text-primary); border-bottom: 1px solid var(--divider); padding-bottom: 4px; margin-top: 10px;">印章检测/识别参数</h4>
 
                                 <div class="form-group">
-                                    <label for="sealDetLimitSideLen">印章检测边长限制 (sealDetLimitSideLen)</label>
+                                    <label for="sealDetLimitSideLen">印章检测边长限制 (sealDetLimitSideLen) <span class="info-icon" data-tooltip="印章文本检测的图像边长限制。大于 0 的任意整数。如果不设置，默认初始化为 736。">?</span></label>
                                     <input type="number" id="sealDetLimitSideLen" placeholder="默认 736">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="sealDetLimitType">印章检测限制类型 (sealDetLimitType)</label>
+                                    <label for="sealDetLimitType">印章检测限制类型 (sealDetLimitType) <span class="info-icon" data-tooltip="印章检测边长限制类型，支持 min 和 max。默认初始化为 min。">?</span></label>
                                     <select id="sealDetLimitType">
                                         <option value="">默认 (min)</option>
                                         <option value="min">限制最短边 (min)</option>
@@ -314,22 +314,22 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="sealDetThresh">印章检测像素阈值 (sealDetThresh)</label>
+                                    <label for="sealDetThresh">印章检测像素阈值 (sealDetThresh) <span class="info-icon" data-tooltip="印章得分大于该阈值的像素点才会被认为是印章文字像素点。如果不设置，默认使用产线初始值 0.2。">?</span></label>
                                     <input type="number" id="sealDetThresh" step="0.05" placeholder="默认 0.2">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="sealDetBoxThresh">印章检测框阈值 (sealDetBoxThresh)</label>
+                                    <label for="sealDetBoxThresh">印章检测框阈值 (sealDetBoxThresh) <span class="info-icon" data-tooltip="印章检测区域内像素点的平均得分大于该阈值时被判定为印章区域。如果不设置，默认使用产线初始值 0.6。">?</span></label>
                                     <input type="number" id="sealDetBoxThresh" step="0.05" placeholder="默认 0.6">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="sealDetUnclipRatio">印章检测扩张系数 (sealDetUnclipRatio)</label>
+                                    <label for="sealDetUnclipRatio">印章检测扩张系数 (sealDetUnclipRatio) <span class="info-icon" data-tooltip="印章检测扩张系数，用于对检测到的印章文字区域进行向外扩张。如果不设置，默认使用产线初始值 0.5。">?</span></label>
                                     <input type="number" id="sealDetUnclipRatio" step="0.1" placeholder="默认 0.5">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="sealRecScoreThresh">印章文本识别阈值 (sealRecScoreThresh)</label>
+                                    <label for="sealRecScoreThresh">印章文本识别阈值 (sealRecScoreThresh) <span class="info-icon" data-tooltip="印章文本识别阈值，得分大于该阈值的印章识别文本才会被保留。如果不设置，默认使用产线初始值 0.0。">?</span></label>
                                     <input type="number" id="sealRecScoreThresh" step="0.05" placeholder="默认 0.0 (不限制)">
                                 </div>
 
@@ -337,44 +337,44 @@
 
                                 <div class="form-group">
                                     <label class="checkbox-label">
-                                        <input type="checkbox" id="useWiredTableCellsTransToHtml"> 有线表结果直转 HTML
+                                        <input type="checkbox" id="useWiredTableCellsTransToHtml"> 有线表结果直转 HTML <span class="info-icon" data-tooltip="是否启用有线表单元格检测结果直转HTML，启用则直接基于有线表单元格检测结果的几何关系构建HTML。">?</span>
                                     </label>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="checkbox-label">
-                                        <input type="checkbox" id="useWirelessTableCellsTransToHtml"> 无线表结果直转 HTML
+                                        <input type="checkbox" id="useWirelessTableCellsTransToHtml"> 无线表结果直转 HTML <span class="info-icon" data-tooltip="是否启用无线表单元格检测结果直转HTML，启用则直接基于无线表单元格检测结果的几何关系构建HTML。">?</span>
                                     </label>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="checkbox-label">
-                                        <input type="checkbox" id="useTableOrientationClassify"> 开启表格方向分类与矫正
+                                        <input type="checkbox" id="useTableOrientationClassify"> 开启表格方向分类与矫正 <span class="info-icon" data-tooltip="是否启用表格使用表格方向分类，启用时当图像中的表格存在90°、180°、270°旋转时，能够将方向校正并正确完成表格识别。">?</span>
                                     </label>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="checkbox-label">
-                                        <input type="checkbox" id="useOcrResultsWithTableCells"> 开启单元格切分 OCR 识别
+                                        <input type="checkbox" id="useOcrResultsWithTableCells"> 开启单元格切分 OCR 识别 <span class="info-icon" data-tooltip="是否启用单元格切分OCR，启用时会基于单元格预测结果对OCR检测结果进行切分和重识别，避免出现文字缺失情况。">?</span>
                                     </label>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="checkbox-label">
-                                        <input type="checkbox" id="useE2eWiredTableRecModel"> 有线表格端到端模型识别
+                                        <input type="checkbox" id="useE2eWiredTableRecModel"> 有线表格端到端模型识别 <span class="info-icon" data-tooltip="是否启用有线表端到端表格识别模式，启用则不使用单元格检测模型，只使用表格结构识别模型。">?</span>
                                     </label>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="checkbox-label">
-                                        <input type="checkbox" id="useE2eWirelessTableRecModel"> 无线表格端到端模型识别
+                                        <input type="checkbox" id="useE2eWirelessTableRecModel"> 无线表格端到端模型识别 <span class="info-icon" data-tooltip="是否启用无线表端到端表格识别模式，启用则不使用单元格检测模型，只使用表格结构识别模型。">?</span>
                                     </label>
                                 </div>
 
                                 <h4 style="font-size: 11px; color: var(--text-primary); border-bottom: 1px solid var(--divider); padding-bottom: 4px; margin-top: 10px;">通用返回控制</h4>
 
                                 <div class="form-group">
-                                    <label for="visualize">返回可视化标注图 (visualize)</label>
+                                    <label for="visualize">返回可视化标注图 (visualize) <span class="info-icon" data-tooltip="是否返回可视化结果图及处理过程中的中间图像。开启此功能后，将增加结果返回时间。">?</span></label>
                                     <select id="visualize">
                                         <option value="">默认 (由服务端配置决定)</option>
                                         <option value="true">返回可视化图 (true)</option>
