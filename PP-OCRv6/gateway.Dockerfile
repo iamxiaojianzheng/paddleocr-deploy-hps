@@ -17,7 +17,7 @@ RUN --mount=type=bind,source=paddlex_hps_OCR_sdk/client,target=/tmp/sdk \
     && python -m pip install --no-cache-dir /tmp/sdk/paddlex_hps_client-*.whl
 
 # Configuration via environment variables
-ENV HPS_TRITON_URL=paddleocr-ocrv5:8001
+ENV HPS_TRITON_URL=paddleocr-ocrv6:8001
 ENV HPS_MAX_CONCURRENT_REQUESTS=16
 ENV HPS_INFERENCE_TIMEOUT=600
 ENV HPS_LOG_LEVEL=INFO

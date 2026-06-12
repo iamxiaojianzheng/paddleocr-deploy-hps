@@ -1,8 +1,8 @@
-# PP-OCRv5 High-Performance Service Deployment
+# PP-OCRv6 High-Performance Service Deployment
 
 [简体中文](README_cn.md)
 
-This directory provides a high-performance service deployment solution for PP-OCRv5 with concurrent request processing support.
+This directory provides a high-performance service deployment solution for PP-OCRv6 with concurrent request processing support.
 
 > This solution currently only supports NVIDIA GPUs. Support for other inference devices is still being developed.
 
@@ -31,7 +31,7 @@ Client → FastAPI Gateway → Triton Server
 
 ```bash
 git clone https://github.com/kyle-kw/paddleocr-deploy-hps.git
-cd paddleocr-deploy-hps/PP-OCRv5
+cd paddleocr-deploy-hps/PP-OCRv6
 ```
 
 2. Start the services:
@@ -44,8 +44,8 @@ The above command will start 2 containers in sequence:
 
 | Service | Description | Port |
 |---------|-------------|------|
-| `paddleocr-ocrv5` | Triton inference server | 8000 (internal) |
-| `paddleocr-ocrv5-gateway` | FastAPI gateway (external entry point) | 8080 |
+| `paddleocr-ocrv6` | Triton inference server | 8000 (internal) |
+| `paddleocr-ocrv6-gateway` | FastAPI gateway (external entry point) | 8080 |
 
 > The first startup will automatically download and build images, which takes longer. Subsequent startups will use local images and start faster.
 
@@ -72,7 +72,7 @@ export HPS_MAX_CONCURRENT_REQUESTS=8
 
 ### Pipeline Configuration
 
-To adjust pipeline configurations (such as model path, batch size, deployment device, etc.), please refer to the Pipeline Configuration section in the [PP-OCRv5 Usage Tutorial](https://github.com/PaddlePaddle/PaddleOCR/blob/main/docs/version3.x/pipeline_usage/OCR.en.md).
+To adjust pipeline configurations (such as model path, batch size, deployment device, etc.), please refer to the Pipeline Configuration section in the [PP-OCRv6 Usage Tutorial](https://github.com/PaddlePaddle/PaddleOCR/blob/main/docs/version3.x/pipeline_usage/OCR.en.md).
 
 ## API Usage
 
@@ -205,8 +205,8 @@ There is a trade-off between instance count and dynamic batching:
 Check the logs for each service to identify the issue:
 
 ```bash
-docker compose logs paddleocr-ocrv5
-docker compose logs paddleocr-ocrv5-gateway
+docker compose logs paddleocr-ocrv6
+docker compose logs paddleocr-ocrv6-gateway
 ```
 
 Common causes include port conflicts, unavailable inference devices, or image pull failures.

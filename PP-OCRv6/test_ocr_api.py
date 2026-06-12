@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Test script for PP-OCRv5 Gateway API."""
+"""Test script for PP-OCRv6 Gateway API."""
 
 import argparse
 import base64
@@ -125,7 +125,7 @@ def _send_ocr_request(base_url: str, payload: dict) -> dict:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Test PP-OCRv5 Gateway API")
+    parser = argparse.ArgumentParser(description="Test PP-OCRv6 Gateway API")
     parser.add_argument(
         "--url",
         default=DEFAULT_GATEWAY_URL,

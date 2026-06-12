@@ -10,7 +10,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Install PaddleX for Python backend models (if not already in base image)
-RUN pip install --no-cache-dir paddlex>=3.6.0 || true
+RUN pip install --no-cache-dir "paddlex>=3.6.0" || true
 
 WORKDIR /app
 COPY paddlex_hps_PaddleOCR-VL-1.6_sdk/server .

@@ -1,8 +1,8 @@
-# PP-OCRv5 高性能服务化部署
+# PP-OCRv6 高性能服务化部署
 
 [English](README.md)
 
-本目录提供一套支持并发请求处理的 PP-OCRv5 高性能服务化部署方案。
+本目录提供一套支持并发请求处理的 PP-OCRv6 高性能服务化部署方案。
 
 > 本方案目前暂时只支持 NVIDIA GPU，对其他推理设备的支持仍在完善中。
 
@@ -31,7 +31,7 @@
 
 ```bash
 git clone https://github.com/kyle-kw/paddleocr-deploy-hps.git
-cd paddleocr-deploy-hps/PP-OCRv5
+cd paddleocr-deploy-hps/PP-OCRv6
 ```
 
 2. 启动服务：
@@ -44,8 +44,8 @@ docker compose up
 
 | 服务 | 说明 | 端口 |
 |------|------|------|
-| `paddleocr-ocrv5` | Triton 推理服务器 | 8000（内部） |
-| `paddleocr-ocrv5-gateway` | FastAPI 网关（对外入口） | 8080 |
+| `paddleocr-ocrv6` | Triton 推理服务器 | 8000（内部） |
+| `paddleocr-ocrv6-gateway` | FastAPI 网关（对外入口） | 8080 |
 
 > 首次启动会自动下载并构建镜像，耗时较长；从第二次启动起将直接使用本地镜像，启动速度更快。
 
@@ -72,7 +72,7 @@ export HPS_MAX_CONCURRENT_REQUESTS=8
 
 ### 产线配置调整
 
-如需调整产线相关配置（如模型路径、批处理大小、部署设备等），请参考 [PP-OCRv5 使用教程](https://github.com/PaddlePaddle/PaddleOCR/blob/main/docs/version3.x/pipeline_usage/OCR.md) 中的产线配置调整说明章节。
+如需调整产线相关配置（如模型路径、批处理大小、部署设备等），请参考 [PP-OCRv6 使用教程](https://github.com/PaddlePaddle/PaddleOCR/blob/main/docs/version3.x/pipeline_usage/OCR.md) 中的产线配置调整说明章节。
 
 ## API 使用
 
@@ -205,8 +205,8 @@ instance_group [
 查看各服务的日志以定位问题：
 
 ```bash
-docker compose logs paddleocr-ocrv5
-docker compose logs paddleocr-ocrv5-gateway
+docker compose logs paddleocr-ocrv6
+docker compose logs paddleocr-ocrv6-gateway
 ```
 
 常见原因包括端口被占用、推理设备不可用或镜像拉取失败。

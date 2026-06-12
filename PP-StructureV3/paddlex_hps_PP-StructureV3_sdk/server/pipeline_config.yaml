@@ -108,7 +108,7 @@ SubPipelines:
     SubModules:
       TextDetection:
         module_name: text_detection
-        model_name: PP-OCRv5_server_det
+        model_name: PP-OCRv6_medium_det
         model_dir: null
         limit_side_len: 736
         limit_type: min
@@ -123,7 +123,7 @@ SubPipelines:
         batch_size: 8
       TextRecognition:
         module_name: text_recognition
-        model_name: PP-OCRv5_server_rec
+        model_name: PP-OCRv6_medium_rec
         model_dir: null
         batch_size: 8
         score_thresh: 0.0
@@ -173,7 +173,7 @@ SubPipelines:
         SubModules:
           TextDetection:
             module_name: text_detection
-            model_name: PP-OCRv5_server_det
+            model_name: PP-OCRv6_medium_det
             model_dir: null
             limit_side_len: 736
             limit_type: min
@@ -188,7 +188,7 @@ SubPipelines:
             batch_size: 8
           TextRecognition:
             module_name: text_recognition
-            model_name: PP-OCRv5_server_rec
+            model_name: PP-OCRv6_medium_rec
             model_dir: null
             batch_size: 8
         score_thresh: 0.0
@@ -218,7 +218,7 @@ SubPipelines:
             unclip_ratio: 0.5
           TextRecognition:
             module_name: text_recognition
-            model_name: PP-OCRv5_server_rec
+            model_name: PP-OCRv6_medium_rec
             model_dir: null
             batch_size: 8
             score_thresh: 0
