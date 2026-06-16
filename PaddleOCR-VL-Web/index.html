@@ -279,7 +279,27 @@
                                     </label>
                                 </div>
 
+                                <div class="switch-item">
+                                    <label class="switch-label" for="mergeLayoutBlocks">
+                                        <span class="label-title">合并版面区域 <span class="info-icon" data-tooltip="是否合并相邻的同类型版面区域块。">?</span></span>
+                                        <span class="label-desc">mergeLayoutBlocks</span>
+                                    </label>
+                                    <label class="switch">
+                                        <input type="checkbox" id="mergeLayoutBlocks">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
 
+                                <div class="switch-item">
+                                    <label class="switch-label" for="returnMarkdownImages">
+                                        <span class="label-title">返回 Markdown 图片 <span class="info-icon" data-tooltip="是否在响应中返回 Markdown 中引用的图片。设为 false 时服务端将跳过图片编码并跳过返回图片。">?</span></span>
+                                        <span class="label-desc">returnMarkdownImages (默认开启)</span>
+                                    </label>
+                                    <label class="switch">
+                                        <input type="checkbox" id="returnMarkdownImages" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
@@ -375,6 +395,11 @@
                                         <option value="true">强制返回 (true)</option>
                                         <option value="false">强制不返回 (false)</option>
                                     </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="markdownIgnoreLabels">过滤标签 (markdownIgnoreLabels) <span class="info-icon" data-tooltip="指定需要在输出的 Markdown 文本中过滤掉的标签列表，输入JSON数组，例如 [&quot;header&quot;, &quot;footer&quot;]。">?</span></label>
+                                    <input type="text" id="markdownIgnoreLabels" placeholder='JSON 数组，例如: ["header", "footer"]'>
                                 </div>
                             </div>
 

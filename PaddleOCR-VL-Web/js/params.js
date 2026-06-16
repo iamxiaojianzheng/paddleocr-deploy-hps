@@ -46,7 +46,9 @@ const ParamCollector = {
             'mergeTables',
             'relevelTitles',
             'layoutNms',
-            'showFormulaNumber'
+            'showFormulaNumber',
+            'mergeLayoutBlocks',
+            'returnMarkdownImages'
             // visualize 三态处理，不在这里
         ];
 
@@ -121,6 +123,21 @@ const ParamCollector = {
                 payload.vlmExtraArgs = JSON.parse(vlmArgsVal);
             } catch (err) {
                 throw new Error('VLM 额外参数必须是合法的 JSON 对象格式');
+            }
+        }
+
+        // 处理 markdownIgnoreLabels
+        const ignoreLabelsVal = document.getElementById('markdownIgnoreLabels').value.trim();
+        if (ignoreLabelsVal) {
+            try {
+                const parsed = JSON.parse(ignoreLabelsVal);
+                if (Array.isArray(parsed)) {
+                    payload.markdownIgnoreLabels = parsed;
+                } else {
+                    throw new Error('过滤标签(markdownIgnoreLabels)必须是合法的 JSON 数组');
+                }
+            } catch (err) {
+                throw new Error('过滤标签(markdownIgnoreLabels)必须是合法的 JSON 数组，例如: ["header", "footer"]');
             }
         }
 
