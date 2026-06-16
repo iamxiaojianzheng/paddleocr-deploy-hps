@@ -38,8 +38,8 @@ const ParamCollector = {
 
         switches.forEach(key => {
             const element = document.getElementById(key);
-            if (element && element.checked) {
-                payload[key] = true;
+            if (element) {
+                payload[key] = element.checked;
             }
         });
 

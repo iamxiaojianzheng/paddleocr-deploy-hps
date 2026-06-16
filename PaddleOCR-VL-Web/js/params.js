@@ -53,16 +53,8 @@ const ParamCollector = {
         switches.forEach(key => {
             const element = document.getElementById(key);
             if (element) {
-                // 如果是 useLayoutDetection, prettifyMarkdown，默认值是 true，其余通常是 false
-                // 为保持一致，只要用户勾选就传 true，未勾选如果是原本默认 true 的我们传 false
-                if (key === 'useLayoutDetection' || key === 'prettifyMarkdown') {
-                    payload[key] = element.checked;
-                } else {
-                    // 对于其他选填开关，只在勾选时传 true，未勾选为了使用系统默认，不传入该字段
-                    if (element.checked) {
-                        payload[key] = true;
-                    }
-                }
+                // 统一显式传递 true 或 false
+                payload[key] = element.checked;
             }
         });
 
@@ -169,11 +161,8 @@ const ParamCollector = {
         switches.forEach(item => {
             const el = document.getElementById(item.id);
             if (el) {
-                if (item.key === 'prettifyMarkdown') {
-                    payload[item.key] = el.checked;
-                } else if (el.checked) {
-                    payload[item.key] = true;
-                }
+                // 统一显式传递 true 或 false
+                payload[item.key] = el.checked;
             }
         });
 

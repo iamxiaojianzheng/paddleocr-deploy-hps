@@ -30,22 +30,10 @@ const ParamCollector = {
         }
 
         // 3. 核心开关
-        // 对于后端默认开启(True)的参数，我们应当显式传入 element.checked (即便为 false 也要传入以覆盖后端默认行为)
-        const defaultTrueSwitches = [
+        const switches = [
             'useTableRecognition',
             'useFormulaRecognition',
-            'useRegionDetection'
-        ];
-        
-        defaultTrueSwitches.forEach(key => {
-            const element = document.getElementById(key);
-            if (element) {
-                payload[key] = element.checked;
-            }
-        });
-
-        // 对于后端默认关闭(False)的参数，如果勾选了则传 true，未勾选如果是 false 我们也可以选择性传入，直接传入 element.checked 即可
-        const defaultFalseSwitches = [
+            'useRegionDetection',
             'useDocOrientationClassify',
             'useDocUnwarping',
             'useTextlineOrientation',
@@ -59,11 +47,10 @@ const ParamCollector = {
             'useE2eWirelessTableRecModel',
             'layoutNms'
         ];
-
-        defaultFalseSwitches.forEach(key => {
+        
+        switches.forEach(key => {
             const element = document.getElementById(key);
             if (element) {
-                // 如果被勾选了，显式传 true；否则如果复选框存在，我们传 false 以防万一
                 payload[key] = element.checked;
             }
         });
